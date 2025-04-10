@@ -22,6 +22,38 @@
     </div>
     <script>
         // Suerte !
+        const getCat = document.querySelector("#get-cat");
+        const catImage = document.querySelector("#cat-image");
+
+        let width = document.querySelector("#width > span");
+
+        let height = document.querySelector("#height > span");
+
+
+        getCat.addEventListener("click", async function () {
+
+            // Guardem la url en una constant
+            const url = "https://api.thecatapi.com/v1/images/search?limit=1";
+
+            // Demanem la informació a la api i la convertim a l'objecte data
+            const response = await fetch(url);
+
+            const data = await response.json();
+            console.log(data);
+
+            // Com que és un array amb un objecte, hem d'accedir a les propietats d'aquest objecte i per això el convertim en una variable
+            const cat = data[0];
+
+            console.log(cat);
+
+            // Assignem les diferents propietats a cadascun dels nodes corresponents
+
+            catImage.src = cat.url;
+            width.textContent = cat.width;
+            height.textContent = cat.height;
+
+            
+        })
     </script>
 </body>
 
